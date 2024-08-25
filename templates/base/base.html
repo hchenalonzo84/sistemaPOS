@@ -36,7 +36,8 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Umizumi</div>
+                {% comment %} <sup>2</sup> {% endcomment %}
             </a>
 
             <!-- Divider -->
@@ -270,7 +271,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                        <img class="rounded-circle" src="{% static "base/img/undraw_profile_1.svg" %}"
                                             alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
@@ -328,7 +329,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="{% static "base/img/undraw_profile.svg" %} ">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -356,17 +357,17 @@
                     </ul>
 
                 </nav>
-                {% block end_top_bar%}
+                {% endblock top_bar %}
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
-                 {% block page_content%}
+                 {% block page_content %}
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
 
                 </div>
-                {% endblock  end_page_content%}
+                {% endblock page_content %}
                 <!-- /.container-fluid -->
 
                 {% block footer %}
@@ -377,7 +378,7 @@
              <footer class="sticky-footer bg-white">
                  <div class="container my-auto">
                      <div class="copyright text-center my-auto">
-                         <span>Copyright &copy; Your Website 2020</span>
+                         <span>Copyright &copy; Umizumi 2024</span>
                         </div>
                     </div>
                 </footer>
@@ -387,7 +388,7 @@
             <!-- End of Content Wrapper -->
             
         </div>
-        {% endblock end_footer %}
+        {% endblock footer %}
     <!-- End of Page Wrapper -->
  {% block login %}{% endblock %}
     <!-- Scroll to Top Button-->
@@ -424,7 +425,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{% static 'base/js/sb-admin-2.min.js'%}"></script>
-    {% block js_page %}{% endblock  %}
+    {% block js_page %}{% endblock %}
 </body>
 
 </html>
