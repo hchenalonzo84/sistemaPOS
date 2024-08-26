@@ -52,6 +52,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'pos.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -130,3 +131,9 @@ STATICFILES_DIRS  = (os.path.join(BASE_DIR,'static'),)
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Redirigir después de iniciar sesión
+LOGIN_REDIRECT_URL = '/'
+
+# Redirigir después de cerrar sesión
+LOGOUT_REDIRECT_URL = '/login/'
