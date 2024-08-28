@@ -82,14 +82,8 @@ DATABASES = {
         'NAME': 'db_pos',  # Nombre de la base de datos
         'USER': 'postgres',  # Nombre de usuario de la base de datos
         # 'PASSWORD': 'Ubuntu2024$',  # Contraseña de tu usuario PostgreSQL
-<<<<<<< HEAD
         # 'PASSWORD': '12345',  # Contraseña de tu usuario PostgreSQL       
-        'PASSWORD': 'Andy10!',  # Contraseña de tu usuario PostgreSQL (Andrea)        
-        #'PASSWORD': '12345',  # Contraseña de tu usuario PostgreSQL      
-=======
-        # 'PASSWORD': '12345',  # Contraseña de tu usuario PostgreSQL      
-        'PASSWORD': 'Andy10!',  # Contraseña de tu usuario PostgreSQL (Andrea)        
->>>>>>> testing
+        'PASSWORD': 'Andy10!',  # Contraseña de tu usuario PostgreSQL (Andrea)       
         'HOST': 'localhost',  # Host de la base de datos (normalmente 'localhost')
         'PORT': '5432',  # Puerto de la base de datos (el predeterminado para PostgreSQL es 5432)
     }
