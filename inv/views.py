@@ -133,7 +133,7 @@ def marca_inactivar(request, id):
         marca.save()
         return redirect("inv:marca_list")
 
-        return render(request,template_name,contexto)
+    return render(request,template_name,contexto)
 
 
 class UnidadMedidaView(LoginRequiredMixin, generic.ListView):
@@ -170,20 +170,20 @@ class UnidadMedidaEdit(LoginRequiredMixin, generic.UpdateView):
         return super().form_valid(form)
 
 
-    def unidadmedida_inactivar(request, id):
-        um = UnidadMedida.objects.filter(pk=id).first()
-        contexto={}
-        template_name="inv/catalogos_del.html"
+def unidadmedida_inactivar(request, id):
+    um = UnidadMedida.objects.filter(pk=id).first()
+    contexto={}
+    template_name="inv/catalogos_del.html"
 
-        if not um:
-            return redirect("inv:marca_list")
+    if not um:
+        return redirect("inv:unidadmedida_list")
     
-        if request.method=='GET':
-            contexto={'obj':um}
+    if request.method=='GET':
+        contexto={'obj':um}
 
-        if request.method=='POST':
-            um.estado=False
-            um.save()
-            return redirect("inv:marca_list")
-
-            return render(request,template_name,contexto)
+    if request.method=='POST':
+        um.estado=False
+        um.save()
+        return redirect("inv:unidadmedida_list")
+    
+    return render(request,template_name,contexto)
