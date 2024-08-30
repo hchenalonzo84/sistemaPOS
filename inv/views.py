@@ -224,7 +224,7 @@ class ProductoEdit(LoginRequiredMixin, generic.UpdateView):
 
 
 def producto_inactivar(request, id):
-    prod = UnidadMedida.objects.filter(pk=id).first()
+    prod = Producto.objects.filter(pk=id).first()
     contexto={}
     template_name="inv/catalogos_del.html"
 
