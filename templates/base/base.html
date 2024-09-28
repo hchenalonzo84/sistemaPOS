@@ -76,6 +76,10 @@
                         <a class="collapse-item" href="{% url 'inv:unidadmedida_list'%}">Unidad Medida</a>
                         <a class="collapse-item" href="{% url 'inv:producto_list'%}">Producto</a>
                     </div>
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Catálogos de Compras</h6>
+                        <a class="collapse-item" href="{% url 'cmp:proveedor_list'%}">Proveedores</a>
+                    </div>
                 </div>
             </li>
 
@@ -107,8 +111,8 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item active">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false"
                     aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Pages</span>
