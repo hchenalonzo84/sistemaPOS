@@ -29,7 +29,7 @@
 </head>
 
 <body id="page-top" class="bg-gradient-primary">
-     {% block side_bar %}
+    {% block side_bar %}
     <!-- Page Wrapper -->
     <div id="wrapper">
 
@@ -73,8 +73,15 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Catálogos de Inventarios</h6>
-                        <a class="collapse-item" href="{% url 'inv:categoria_list'%}">Cateorias</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+                        <a class="collapse-item" href="{% url 'inv:categoria_list'%}">Categorias</a>
+                        <a class="collapse-item" href="{% url 'inv:subcategoria_list'%}">Sub Categorias</a>
+                        <a class="collapse-item" href="{% url 'inv:marca_list'%}">Marca</a>
+                        <a class="collapse-item" href="{% url 'inv:unidadmedida_list'%}">Unidad Medida</a>
+                        <a class="collapse-item" href="{% url 'inv:producto_list'%}">Producto</a>
+                    </div>
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Catálogos de Compras</h6>
+                        <a class="collapse-item" href="{% url 'cmp:proveedor_list'%}">Proveedores</a>
                     </div>
                 </div>
             </li>
@@ -107,8 +114,8 @@
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item active">
-                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true"
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="false"
                     aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Pages</span>
@@ -152,7 +159,7 @@
 
         </ul>
         <!-- End of Sidebar -->
-      {% endblock side_bar %}  
+        {% endblock side_bar %}  
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -160,7 +167,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                 {% block top_bar %}
+                {% block top_bar %}
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                     <!-- Sidebar Toggle (Topbar) -->
@@ -332,7 +339,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ user.username }}</span>
                                 <img class="img-profile rounded-circle"
                                     src="{% static "base/img/undraw_profile.svg" %} ">
                             </a>
@@ -365,7 +372,7 @@
                 {% endblock top_bar %}
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
-                 {% block page_content %}
+                {% block page_content %}
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
@@ -378,12 +385,12 @@
                 {% block footer %}
             </div>
             <!-- End of Main Content -->
-             
-             <!-- Footer -->
-             <footer class="sticky-footer bg-white">
-                 <div class="container my-auto">
-                     <div class="copyright text-center my-auto">
-                         <span>Copyright &copy; Umizumi 2024</span>
+            
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Umizumi 2024</span>
                         </div>
                     </div>
                 </footer>
@@ -395,7 +402,7 @@
         </div>
         {% endblock footer %}
     <!-- End of Page Wrapper -->
- {% block login %}{% endblock %}
+{% block login %}{% endblock %}
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -425,6 +432,8 @@
     </div>
 </div>
 
+<div class="modal fade" id="popup"></div>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="{% static 'base/vendor/jquery/jquery.min.js'%}"></script>
@@ -441,6 +450,30 @@
     <script src="{% static 'base/vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
 
     {% block js_page %}{% endblock %}
+
+<!-- Ventana Modal -->
+{% block control_modal %}
+<script>
+    function abrir_modal(url)
+    {
+        $("#popup").load(url, function(){
+            $(this).modal({
+                backdrop:'static',
+                keyboard: false
+            })
+            $(this).modal('show');
+        });
+        return false;
+    }
+
+    function cerrar_modal()
+    {
+        $('#popup').modal('hide');
+        return false;
+    }
+</script>
+{% endblock%}
+
 </body>
 
 </html>
