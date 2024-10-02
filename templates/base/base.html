@@ -26,6 +26,10 @@
 
     <!-- jQuery Confirm -->
     <link href="{% static 'base/vendor/jquery_confirm/jquery-confirm.min.css' %}" rel="stylesheet">
+    
+    <!-- XDSoft DateTimePicker -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />  
+
 </head>
 
 <body id="page-top" class="bg-gradient-primary">
@@ -98,6 +102,26 @@
                     </div>
                 </div>
             </li>
+
+            <!-- C O M P R A S -->
+
+            <li class = "nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCompras" aria-expanded="true" aria-controls="collapseCompras">
+                    <i class="fas fa-fw fa-truck"></i>
+                    <span>Movimientos</span>
+                </a>
+                <div id="collapseCompras" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Entradas</h6>
+                        <a class="collapse-item" href="{% url 'cmp:compras_list' %}">Compras</a>
+                    </div>
+                </div>
+            </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+            
+
+            <!-- F I N   C O M P R A S -->
 
             <!-- Nav Item - Utilities Collapse Menu 
             <li class="nav-item">
@@ -461,8 +485,16 @@
     <!-- Page level plugins -->
     <script src="{% static 'base/vendor/datatables/jquery.dataTables.min.js'%}"></script>
     <script src="{% static 'base/vendor/datatables/dataTables.bootstrap4.min.js'%}"></script>
+    
     <script src="{% static 'base/vendor/jquery_confirm/jquery-confirm.min.js'%}"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>  
 
+    <script>
+        $(document).ready(function () {
+          jQuery.datetimepicker.setLocale('es');
+        });
+    </script>
 
 <!-- Ventana Modal-->
 {% block control_modal %}
