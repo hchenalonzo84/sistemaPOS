@@ -9,14 +9,144 @@
     </div>
     <div class="card-body">
         <div class="content">
+            <!-- Seccion Superior -->
             <div class="row">
-                <div class="col-lg-6">Sección Izquierda</div>
-                <div class="col-lg-6">Sección Derecha</div>
+                <!-- Seccion Izquierda -->
+                <div class="col-lg-6 form-group">
+                    <div class="content">
+                    <div class="row">
+                        <div class="col-lg-1">No.</div>
+                        <div class="col-lg-4">
+                            <input type="text" name="enc_id" id="enc_id" readonly class ="form-control">
+                        </div>
+                        <div class="col-lg-2">
+                            Cliente:
+                        </div>
+                        <div class="col-lg-5 form-group">
+                            <select name="enc_cliente" id="enc_cliente" class="form-control">
+                                <option value="0">Seleccione Cliente</option>
+                                {% for item in clientes %}
+                                <option value="{{item.id}}">{{ item.nombres }} {{item.apellidos}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                <div class="col-lg-6 p-2">
+                    <div class="row">
+                        <div class="col-log-2">
+                            Fecha:
+                        </div>
+                        <div class="col-lg-8 form-group">
+                            <input type="text" name="fecha" id="fecha" class="form-control from-control-user"
+                            value="{{ enc.fecha|date:'Y-m-d' }}" readonly />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 p-2 form-group">
+                    <div class="row">
+                        <div class="col-lg-3">Sub Total</div>
+                        <div class="col-lg-8">
+                            <input type="number" class="form-control text-right" value="0.00" readonly
+                            name="sub_total" id="sub_total">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">Descuento</div>
+                        <div class="col-lg-8">
+                            <input type="number" class="form-control text-right" value="0.00" disabled
+                            name="descuento" id="descuento">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-3">Total</div>
+                    <div class="col-lg-8">
+                        <input type="number" class="form-control text-right" value="0.00" disabled
+                        name="total" id="total">
+                        </div>
+                    </div>
+                </div>
             </div>
+        </div>
+    </div>
+<!-- Fin seccion Izquierda -->
+
+            <!-- Seccion Derecha -->
+            <div class="col-lg-6 form-group">
+                <div class="row p-2">
+                    <div class="col-lg-1">Cod</div>
+                    <div class="col-lg-3">
+                        <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Cod. Producto">
+                    </div>
+                    <div class="col-lg-7">
+                        <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion" disabled>
+                    </div>
+                    <div class="col-lg-1">
+                        <button type="button" class="btn btn-info" id="btnBuscar">
+                            <i class="fab fa-searchengin"></i>
+                        </button>
+                    </div>
+                </div>
+                    <div class="row">
+                        <div class="col-lg-1">Cant</div>
+                        <div class="col-lg-3">
+                            <input type="number" class="form-control" name="cantidad" id="cantidad" placeholder="Cantidad">
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="number" class="form-control" name="precio" id="precio" placeholder="Precio" readonly>
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="number" class="form-control" name="descuento" id="descuento" placeholder="Descuento">
+                        </div>
+                        <div class="col-lg-1">
+                            <button type="button" class="btn btn-danger" id="btnGuardar"><i class="far fa-plus-square"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin seccion Derecha -->
+
+            </div>
+        
+            <!-- Inicio Detalle -->
             <hr>
             <div class="row p-1">
-                Detalle
+                <div class="col-lg">
+                    <table
+                    data-toggle="table" 
+                    data-pagination="true" 
+                    data-search="true" 
+                    data-show-columns="true"
+                    data-show-toggle="true"
+                    data-locale="es-NI"
+                    >
+                    <thead>
+                        <th data-sortable="true" data-field="id">Id</th>
+                        <th data-sortable="true" data-field="codigo">Código</th>
+                        <th data-sortable="true" data-field="descripcion">Descripcion</th>
+                        <th data-field="descripcion">Cant</th>
+                        <th data-field="subtotal">S.Total</th>
+                        <th data-field="descuento">Desc.</th>
+                        <th data-field="total">Total</th>
+                        <th class="all">Acciones</th>
+                    </thead>
+                    <tbody>
+                        {% for item in obj %}
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.cliente }}</td>
+                            <td>{{ item.total }}</td>
+                            <td>{{ item.estado|yesno:"Activo,Inactivo" }}</td>
+                            <td>
+                                <button class="btn btn-warning btn-circle"><i class="far fa-edit"></i></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
+                </div>
+            <!-- Fin Detalle -->
         </div>
     </div>
 </div>
@@ -27,6 +157,19 @@
 <script>
     $(function (){
         $("#sidebarToggle").click();
+        $("#enc_cliente").select2({
+            placeholder:"Seleccione Cliente",
+            allowClear:true
+        });
+
+        $("#btnBuscar").click(function(e){
+            if($("#enc_cliente").val()==="0"){
+                mensaje("Cliente no Seleccionado", 'red');
+                return false;
+            }
+            abrir_modal("{% url 'fac:factura_producto' %}");
+        });
+
     });
 </script>
 {% endblock %}
