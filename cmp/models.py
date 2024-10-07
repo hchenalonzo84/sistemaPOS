@@ -43,6 +43,7 @@ class Proveedor(ClaseModelo):
     class Meta:
         verbose_name_plural = "Proveedores"
 
+
 class ComprasEnc(ClaseModelo):
     fecha_compra=models.DateField(null=True,blank=True)
     observacion=models.TextField(blank=True,null=True)
@@ -65,6 +66,7 @@ class ComprasEnc(ClaseModelo):
     class Meta:
         verbose_name_plural = "Encabezado Compras"
         verbose_name = "Encabezado Compra"
+
 
 class ComprasDet(ClaseModelo):
     compra=models.ForeignKey(ComprasEnc,on_delete=models.CASCADE)
