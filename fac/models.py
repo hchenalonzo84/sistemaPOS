@@ -1,5 +1,10 @@
 from django.db import models
 
+#Para signals
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
+from django.db.models import Sum
+
 from bases.models import ClaseModelo, ClaseModelo2
 from inv.models import Producto
 
@@ -60,6 +65,9 @@ class FacturaEnc(ClaseModelo2):
     class Meta:
         verbose_name_plural = "Encabezado Facturas"
         verbose_name = "Encabezado Factura"
+        permissions = [
+            ('sup_caja_facturasenc', 'Permisos de Supervisor de Caja Encabezado')
+        ]
 
 
 class FacturaDet(ClaseModelo2):
@@ -82,3 +90,30 @@ class FacturaDet(ClaseModelo2):
     class Meta:
         verbose_name_plural = "Detalles Facturas"
         verbose_name = "Detalle Factura"
+        permissions = [
+            ('sup_caja_facturasdet', 'Permisos de Supervisor de Caja Encabezado')
+        ]
+
+
+@receiver(post_save, sender=FacturaDet)
+def detalle_fac_guardar(sender, instance, **kwargs):
+    factura_id = instance.factura.id
+    producto_id = instance.producto.id 
+
+    enc = FacturaEnc.objects.filter(pk=factura_id).first()
+    if enc:
+        sub_total = FacturaDet.objects.filter(factura=factura_id).aggregate(sub_total=Sum('sub_total')).get('sub_total', 0.00)
+        descuento = FacturaDet.objects.filter(factura=factura_id).aggregate(descuento=Sum('descuento')).get('descuento', 0.00)
+
+        enc.sub_total = sub_total
+        enc.descuento = descuento
+        enc.save()
+
+        prod = Producto.objects.filter(pk=producto_id).first()
+        if prod:
+            existencia_actual = float(prod.existencia) if prod.existencia else 0.0
+            cantidad_a_restar = float(instance.cantidad) if instance.cantidad else 0.0
+
+            nueva_existencia = existencia_actual - cantidad_a_restar
+            prod.existencia = nueva_existencia
+            prod.save()
