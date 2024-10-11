@@ -151,3 +151,8 @@ LOGOUT_REDIRECT_URL = '/login/'
 # Sobrescribe la configuración con DATABASE_URL en producción (Heroku)
 db_from_env = dj_database_url.config(conn_max_age=500, ssl_require=True)
 DATABASES['default'].update(db_from_env)
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
