@@ -88,13 +88,11 @@ WSGI_APPLICATION = 'pos.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Motor para usar psycopg 2.x
-        'NAME': 'db_pos',  # Nombre de la base de datos
-        'USER': 'postgres',  # Nombre de usuario de la base de datos
-        'PASSWORD': 'Ubuntu2024$',  # Contraseña de tu usuario PostgreSQL
-        #'PASSWORD': '12345',  # Contraseña de tu usuario PostgreSQL       
-        # 'PASSWORD': 'Andy10!',  # Contraseña de tu usuario PostgreSQL (Andrea)       
-        'HOST': 'localhost',  # Host de la base de datos (normalmente 'localhost')
-        'PORT': '5432',  # Puerto de la base de datos (el predeterminado para PostgreSQL es 5432)
+        'NAME': 'db_pos',  # Nombre de la base de datos local
+        'USER': 'postgres',  # Nombre de usuario de la base de datos local
+        'PASSWORD': 'Ubuntu2024$',  # Contraseña de tu usuario PostgreSQL local
+        'HOST': 'localhost',  # Host de la base de datos local
+        'PORT': '5432',  # Puerto de la base de datos local
     }
 }
 
@@ -150,5 +148,6 @@ LOGIN_REDIRECT_URL = '/'
 # Redirigir después de cerrar sesión
 LOGOUT_REDIRECT_URL = '/login/'
 
-db_from_env = dj_database_url.config(conn_max_age=500)
+# Sobrescribe la configuración con DATABASE_URL en producción (Heroku)
+db_from_env = dj_database_url.config(conn_max_age=500, ssl_require=True)
 DATABASES['default'].update(db_from_env)
