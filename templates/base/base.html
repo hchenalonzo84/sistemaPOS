@@ -26,6 +26,9 @@
 
     <!-- jQuery Confirm -->
     <link href="{% static 'base/vendor/jquery_confirm/jquery-confirm.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'base/css/cards.css' %}" rel="stylesheet">
+    
     
     <!-- XDSoft DateTimePicker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />  
@@ -132,7 +135,7 @@
                 </div>
             </li>
             <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
+            {% comment %} <hr class="sidebar-divider d-none d-md-block"> {% endcomment %}
             
 
             <!-- F I N   C O M P R A S -->
@@ -157,12 +160,12 @@
             </li> -->
 
             <!-- Divider -->
-            <hr class="sidebar-divider">
+            {% comment %} <hr class="sidebar-divider"> {% endcomment %}
 
             <!-- Heading -->
-            <div class="sidebar-heading">
+            {% comment %} <div class="sidebar-heading">
                 Addons
-            </div>
+            </div> {% endcomment %}
 
             <!-- Nav Item - Pages Collapse Menu 
             <li class="nav-item">
@@ -214,7 +217,7 @@
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
-            <!-- Main Content -->
+            <!-- compras Content -->
             <div id="content">
 
                 <!-- Topbar -->
@@ -427,15 +430,71 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Sistema de Compra y Facturación</h1>
-
+                    <h1 class="h3 mb-4 text-gray-800">Sistema de Compra y Facturación</h1><hr>
+                    <main class="main-content">
+                    <h2 class="h2">Catalogo de Inventario</h2>                        
+                        <section class="main-section">
+                            <section class="main-section buttons-section">
+                                <a href="{% url 'inv:categoria_list'%}" style="text-decoration: none;">
+                                <div class="icon-button">
+                                        <i class="fas fa-file-invoice"></i>
+                                        <span>Categorias</span>
+                                    </div>
+                                </a>
+                                <a href="{% url 'inv:subcategoria_list'%}" style="text-decoration: none;">
+                                <div class="icon-button">
+                                    <i class="fas fa-folder-minus"></i>
+                                    <span>Sub Categorias</span>
+                                </div>
+                                </a>
+                                <a href="{% url 'inv:marca_list'%}" style="text-decoration: none;">
+                                    <div class="icon-button">
+                                        <i class="fas fa-box-open"></i>
+                                        <span>Marca</span>
+                                    </div>
+                                </a>
+                                <a href="{% url 'inv:unidadmedida_list'%}" style="text-decoration: none;">
+                                    <div class="icon-button">
+                                        <i class="fas fa-cubes"></i>
+                                        <span>Unidad Medida</span>
+                                    </div>
+                                </a>
+                                <a href="{% url 'inv:producto_list'%}" style="text-decoration: none;">
+                                    <div class="icon-button">
+                                        <i class="fab fa-product-hunt"></i>
+                                        <span>Producto</span>
+                                    </div>
+                                </a>
+                            </section>
+                        </section>
+                        
+                        <h2 class="h2">Movimientos</h2>                        
+                        <section class="main-section">
+                            <section class="main-section buttons-section">
+                                <a href="{% url 'cmp:compras_list' %}" style="text-decoration: none;">
+                                <div class="icon-button">
+                                    <i class="far fa-credit-card"></i>
+                                        <span>Compras</span>
+                                    </div>
+                                </a>
+                                <a href="{% url 'fac:factura_list' %}" style="text-decoration: none;">
+                                <div class="icon-button">
+                                    <i class="fas fa-file-invoice-dollar"></i>
+                                    <span>Facturas</span>
+                                </div>
+                        
+                            </section>
+                        </section>
+                                  
+                    </main>
+            
                 </div>
                 {% endblock page_content %}
                 <!-- /.container-fluid -->
 
                 {% block footer %}
             </div>
-            <!-- End of Main Content -->
+            <!-- End of compras Content -->
             
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
